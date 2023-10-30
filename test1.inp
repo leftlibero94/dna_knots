@@ -1,0 +1,12 @@
+100.0        H1
+0.0          H2
+0.075d0      delta
+50           gamma
+10000000      maxkb
+1            nconf
+1            kflag (1: print running table)
+0            istart (0: from native, 1: random)
+10           kwrite (how often to print energy)
+0.1          dfold  (distance for folding criteria)
+100000        ieq
+40000000     icq
