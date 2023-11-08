@@ -50,7 +50,7 @@ c	tr=0.125d0
 	iflg  = 0	! save to 'simdata.kat' when iflg=1
 
 c        CALL GOSAMPLE
-	open(20,file='knot5.dat',status='old')
+	open(20,file='garcoords_tight.txt',status='old')
 
         DO I=1,men
 	read(20,*)xn(i),yn(i),zn(i)
@@ -98,7 +98,7 @@ c	read(1,*)tr
 	xmass=1.d0
 
 
-	aaa(1)=0.200d0
+	aaa(1)=0.100d0
 	aaa(2)=0.205d0
 		aaa(3)=0.210d0
     	aaa(4)=0.215d0
@@ -126,7 +126,7 @@ c        iseed=674673
 	dfr=rand(iseed)
 	loop=1.0
 c	open(3, file='status.txt', status='unknown')
-	do ii=6,6
+	do ii=1,1
 	tr=aaa(ii)
 c        write(3,*)tr
         write(fname2,'(a,f5.3,a,f5.3,a)')
@@ -472,8 +472,8 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
 c	wall force
 	do 613 i=5,men-4
-	  dz1=z0(i)-z0(1)
-	  dz2=z0(men)-z0(i)
+	  dz1=z0(1)-z0(i)
+	  dz2=z0(i)-z0(men)
 c	  write(*,*) i, x0(i), x0(1), x0(men)
 	    if (dz1.lt.rcut) then
 	      AA=1/dz1**12
@@ -481,7 +481,7 @@ c	  write(*,*) i, x0(i), x0(1), x0(men)
               ENE=4.0d0*(AA-BB)
               ENER=ENER+ENE
               FCE=48.0d0*AA-24.0d0*BB
-              fz(i)=fz(i)+FCE
+              fz(i)=fz(i)-FCE
 c 	      write(*,*) FCE, ENE, i, dy1             
             else if (dz2.lt.rcut) then
               AA=1/dz2**12
@@ -489,7 +489,7 @@ c 	      write(*,*) FCE, ENE, i, dy1
               ENE=4.0d0*(AA-BB)
               ENER=ENER+ENE
               FCE=48.0d0*AA-24.0d0*BB
-              fz(i)=fz(i)-FCE
+              fz(i)=fz(i)+FCE
 c             write(*,*) FCE, ENE, i, dy2
             endif
 613 	continue
